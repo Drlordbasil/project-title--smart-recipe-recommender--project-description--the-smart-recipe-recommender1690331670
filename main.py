@@ -1,3 +1,4 @@
+from statistics import mean
 Here are some improvements to the Python program:
 
 1. Use consistent naming conventions: Use lowercase letters and underscores for variables and functions, and use CamelCase for class names. This will improve the readability and maintainability of the code.
@@ -6,7 +7,7 @@ Here are some improvements to the Python program:
 
 3. Add docstrings: Add docstrings to the classes and methods to provide clear explanations of their functionality and parameters.
 
-4. Use list comprehensions: Replace the `for` loops in the `filter_by_cuisine`, `filter_by_time`, and `filter_by_difficulty` methods of the `RecipeDatabase` class with list comprehensions. This will make the code more concise and pythonic.
+4. Use list comprehensions: Replace the `for ` loops in the `filter_by_cuisine`, `filter_by_time`, and `filter_by_difficulty` methods of the `RecipeDatabase` class with list comprehensions. This will make the code more concise and pythonic.
 
 5. Use set intersection for ingredient matching: In the `recommend_recipes_by_ingredients` method of the `SmartRecipeRecommender` class, use the `set` type and the `&` operator to find the intersection of the user ingredients and the recipe ingredients. This will make the code more efficient and easier to read.
 
@@ -17,7 +18,7 @@ Here are some improvements to the Python program:
 Here's the improved version of the program:
 
 ```python
-from statistics import mean
+
 
 class Recipe:
     def __init__(self, name, cuisine, ingredients, instructions, cooking_time, nutrition, ratings):
@@ -29,12 +30,14 @@ class Recipe:
         self.nutrition = nutrition
         self.ratings = ratings
 
+
 class User:
     def __init__(self, name, dietary_preferences, cooking_skills, nutritional_goals):
         self.name = name
         self.dietary_preferences = dietary_preferences
         self.cooking_skills = cooking_skills
         self.nutritional_goals = nutritional_goals
+
 
 class RecipeDatabase:
     def __init__(self, recipes):
@@ -45,12 +48,13 @@ class RecipeDatabase:
 
     def filter_by_cuisine(self, cuisine):
         return [recipe for recipe in self.recipes if recipe.cuisine.lower() == cuisine.lower()]
-    
+
     def filter_by_time(self, max_cooking_time):
         return [recipe for recipe in self.recipes if recipe.cooking_time <= max_cooking_time]
 
     def filter_by_difficulty(self, max_difficulty):
         return [recipe for recipe in self.recipes if recipe.cooking_difficulty <= max_difficulty]
+
 
 class SmartRecipeRecommender:
     def __init__(self, recipe_database):
@@ -78,6 +82,7 @@ class SmartRecipeRecommender:
     def generate_shopping_list(self, meal_plan):
         return [ingredient for recipe in meal_plan.values() for ingredient in recipe.ingredients]
 
+
 class RecipeCommunity:
     def __init__(self):
         self.recipes = []
@@ -95,11 +100,16 @@ class RecipeCommunity:
         print(f"Shared recipe: {recipe.name}")
 
 # Example usage
+
+
 def main():
     # Creating recipes
-    pancakes = Recipe("Pancakes", "Breakfast", ["flour", "milk", "eggs"], "Mix ingredients, cook in a pan", 10, {}, [])
-    carbonara = Recipe("Spaghetti Carbonara", "Italian", ["spaghetti", "bacon", "eggs"], "Cook bacon, mix with cooked spaghetti and beaten eggs", 20, {}, [])
-    curry = Recipe("Chicken Curry", "Indian", ["chicken", "curry paste", "coconut milk"], "Cook chicken with curry paste and coconut milk", 30, {}, [])
+    pancakes = Recipe("Pancakes", "Breakfast", [
+                      "flour", "milk", "eggs"], "Mix ingredients, cook in a pan", 10, {}, [])
+    carbonara = Recipe("Spaghetti Carbonara", "Italian", [
+                       "spaghetti", "bacon", "eggs"], "Cook bacon, mix with cooked spaghetti and beaten eggs", 20, {}, [])
+    curry = Recipe("Chicken Curry", "Indian", [
+                   "chicken", "curry paste", "coconut milk"], "Cook chicken with curry paste and coconut milk", 30, {}, [])
 
     # Creating recipe database
     recipe_database = RecipeDatabase([pancakes, carbonara, curry])
@@ -108,29 +118,34 @@ def main():
     recommender = SmartRecipeRecommender(recipe_database)
 
     # Creating user profile
-    user = User("John", ["vegetarian"], 3, {"calories": 2000, "protein": "30%"})
+    user = User("John", ["vegetarian"], 3, {
+                "calories": 2000, "protein": "30%"})
 
     # Recommending recipes based on ingredients
     user_ingredients = ["flour", "milk"]
-    ingredient_recipes = recommender.recommend_recipes_by_ingredients(user_ingredients)
+    ingredient_recipes = recommender.recommend_recipes_by_ingredients(
+        user_ingredients)
     print("Recipes based on ingredients:")
     for recipe in ingredient_recipes:
         print(recipe.name)
 
     # Recommending recipes based on dietary preferences
-    dietary_preference_recipes = recommender.recommend_recipes_by_dietary_preferences(user.dietary_preferences)
+    dietary_preference_recipes = recommender.recommend_recipes_by_dietary_preferences(
+        user.dietary_preferences)
     print("\nRecipes based on dietary preferences:")
     for recipe in dietary_preference_recipes:
         print(recipe.name)
 
     # Recommending recipes based on cooking skills
-    cooking_skill_recipes = recommender.recommend_recipes_by_cooking_skills(user.cooking_skills)
+    cooking_skill_recipes = recommender.recommend_recipes_by_cooking_skills(
+        user.cooking_skills)
     print("\nRecipes based on cooking skills:")
     for recipe in cooking_skill_recipes:
         print(recipe.name)
 
     # Recommending recipes based on nutritional goals
-    nutritional_goal_recipes = recommender.recommend_recipes_by_nutrition(list(user.nutritional_goals.keys()))
+    nutritional_goal_recipes = recommender.recommend_recipes_by_nutrition(
+        list(user.nutritional_goals.keys()))
     print("\nRecipes based on nutritional goals:")
     for recipe in nutritional_goal_recipes:
         print(recipe.name)
@@ -160,6 +175,7 @@ def main():
 
     # Sharing recipe
     community.share_recipe(curry)
+
 
 if __name__ == "__main__":
     main()
